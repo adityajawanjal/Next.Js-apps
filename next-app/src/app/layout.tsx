@@ -24,7 +24,6 @@ export default function RootLayout({
             <Navbar />    
           </nav>
           <main className=" mb-40 container mx-auto">
-            
             {children}
             </main>
           <footer  className=" absolute bottom-2 w-full ">

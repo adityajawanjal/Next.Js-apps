@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -13,13 +14,31 @@ const Navbar = () => {
         />
         <h2 className="ml-5 text-xl md:text-4xl">Blogipodia</h2>
       </div>
-      <div>
-      <Image
+
+      <div className="flex items-center ">
+        <div className=" hidden lg:flex">
+          <ul className="flex">
+            {[
+              ["Sign Up", "/signup"],
+              ["Login", "/login"],
+              ["Add Post", "/post"],
+            ].map(([title, url]) => {
+              return (
+                <Link href={url} key={title} className="ml-5 text-2xl italic">
+                  <button className="border-2 rounded-xl py-3 px-6 bg-blue-300 hover:bg-gray-300 ">
+                    {title}
+                  </button>
+                </Link>
+              );
+            })}
+          </ul>
+        </div>
+        <Image
           src={"/favicon.ico"}
           alt="Logo"
           width={100}
           height={100}
-          className=" rounded-full w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14"
+          className=" rounded-full w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 ml-5"
         />
       </div>
     </div>

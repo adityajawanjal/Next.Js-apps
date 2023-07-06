@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { url } from "../utils/api";
 
-const BlogCard = ({ title, description, author, date }) => {
+const BlogCard = ({ title, description, author, date , pic }) => {
   const updateDate = () => {
     const d = new Date(date);
     return d.toString().split("GMT")[0];
@@ -18,7 +19,8 @@ const BlogCard = ({ title, description, author, date }) => {
         </h2>
         <div className="flex items-center my-2 ">
           <Image
-            src={"/favicon.ico"}
+            src={`${url}${pic}`}
+            // src={''}
             alt="Logo"
             width={100}
             height={100}

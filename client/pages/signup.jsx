@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { postImage, register } from "../utils/api";
+import cookie from "js-cookie";
 
 const signup = () => {
   const [name, setName] = useState();
@@ -14,7 +15,7 @@ const signup = () => {
     
     let FirstName = name ? name.split(' ')[0] ? name.split(' ')[0] :'' :'';
     let LastName = name ? name.split(' ')[1] ? name.split(' ')[1] :'' :'';
-    let url = '';
+    let url = {};
     if(file){
       const data = new FormData();
       data.append('files',file);
@@ -34,7 +35,7 @@ const signup = () => {
      return alert(result);
     }
     const token = result.jwt;
-    console.log(token);
+    cookie.set('token',token , {expires:7});
   };
 
   return (

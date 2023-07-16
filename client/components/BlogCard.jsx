@@ -2,6 +2,7 @@ import Image from "next/image";
 import { url } from "../utils/api";
 
 const BlogCard = ({ title, description, author, date , pic }) => {
+  
   const updateDate = () => {
     const d = new Date(date);
     return d.toString().split("GMT")[0];

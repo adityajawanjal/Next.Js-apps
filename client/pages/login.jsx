@@ -2,8 +2,10 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { loginUser } from "../utils/api";
+import { setCookie } from "nookies";
 
 const login = () => {
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -18,6 +20,7 @@ const login = () => {
       alert(res);
     }
     console.log(res);
+    setCookie(null, "token", res.jwt, { maxAge: 24 * 60 * 60, path: "/" })
   };
 
   return (

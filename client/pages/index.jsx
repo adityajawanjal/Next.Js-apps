@@ -3,8 +3,7 @@ import Tabs from "../components/Tabs";
 import { fetchAllUsers, fetchArticles, fetchCategories } from "../utils/api";
 import Link from "next/link";
 
-const Home = ({ categories, articles , users }) => {
-  // console.log(users.find(i=>i.email === 'amit@gmail.com'));
+const Home = ({ categories, articles, users }) => {
   return (
     <div className="py-5">
       <Tabs categories={categories} />
@@ -12,17 +11,24 @@ const Home = ({ categories, articles , users }) => {
         {articles?.map((e) => {
           return (
             <Link key={e.id} href={`/${e.attributes.Slug}`}>
-            <BlogCard 
-              title={e.attributes.Title}
-              description={e.attributes.Description}
-              author={
-                e.attributes.users_permissions_user.data.attributes.FirstName +
-                " " +
-                e.attributes.users_permissions_user.data.attributes.LastName
-              }
-              pic={users.find(i=>i.email === e.attributes.users_permissions_user.data.attributes.email).Profile.url}
-              date={e.attributes.updatedAt}
-            />
+              <BlogCard
+                title={e.attributes.Title}
+                description={e.attributes.Description}
+                author={
+                  e.attributes.users_permissions_user.data.attributes
+                    .FirstName +
+                  " " +
+                  e.attributes.users_permissions_user.data.attributes.LastName
+                }
+                pic={
+                  users.find(
+                    (i) =>
+                      i.email ===
+                      e.attributes.users_permissions_user.data.attributes.email
+                  ).Profile.url
+                }
+                date={e.attributes.updatedAt}
+              />
             </Link>
           );
         })}
@@ -33,7 +39,7 @@ const Home = ({ categories, articles , users }) => {
 
 export default Home;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (ctx) => {
   const res = await fetchCategories();
   const res2 = await fetchArticles();
   const res3 = await fetchAllUsers();
